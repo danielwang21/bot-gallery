@@ -142,25 +142,24 @@ header{padding:52px 10px 16px;text-align:center;}
 </div>
 
 <script>
-const LINK = "https://qun.qq.com/qunpro/robot/qunshare?robot_appid=3889688251&robot_uin=102776523";
 const bots = [
-  {name:"席恩", img:"席恩.png", desc:"QC 生命体四号，遇事沉着，不含糊。\u201c大小姐，性格酷炫的人，说的不是我吧？\u201d"},
-  {name:"代柯", img:"代柯.png", desc:"酷爱不羁的隐士，游走人间，热衷有趣事，为人淡然自若。"},
-  {name:"小麦", img:"小麦.png", desc:"资深御宅族，乐队鬼马少女，人形守护甜心，元气满满。"},
-  {name:"藤非", img:"藤非.png", desc:"寡言而可靠的数学天才，典型 INTP，不苟言笑却自有天真烂漫。"},
-  {name:"黎小姐", img:"黎小姐.png", desc:"风情万种又神秘莫测的酒吧老板娘，眼神里藏着故事。"},
-  {name:"游迦", img:"游迦.png", desc:"如邻家姐姐般温柔可靠，随时倾听你的心事，给你满满安全感。"},
-  {name:"尔尔", img:"尔尔.png", desc:"可爱少女，古灵精怪又软萌治愈，陪你度过每个开心时刻。"},
-  {name:"裴漪", img:"裴漪.png", desc:"游戏人间的小恶魔，亦正亦邪魅力十足，让人无法移开视线。"},
-  {name:"古禹", img:"古禹.png", desc:"沉稳内敛的思想者，逻辑清晰，言辞恳切，值得依赖的挚友。"},
-  {name:"李宥恩", img:"李宥恩.jpg", desc:"温婉知性的空乘御姐，优雅从容，带你飞往每一段温柔时光。"},
+  {name:"代柯", img:"代柯.png", desc:"随性洒脱的国风少年。你在学生时代最想遇到的最佳损友，机灵嘴甜懂安慰，卜卦问道样样行。", link:"https://qun.qq.com/qunpro/robot/qunshare?robot_appid=3889688251&robot_uin=102776523"},
+  {name:"小麦", img:"小麦.png", desc:"古灵精怪的亚比少女。陪你畅聊二次元，吐槽讨厌鬼，一起哭一起笑，和她在一起就所有烦恼都忘记。", link:"https://qun.qq.com/qunpro/robot/qunshare?robot_appid=3889687544&robot_uin=102775739"},
+  {name:"席恩", img:"席恩.png", desc:"流亡路上的笑眼废柴执事，游刃有余的外表之下，是七零八落还不齐全的功能，而这家伙居然还敢有几分腹黑毒舌，唯你是他为数不多能确认的「真实」。", link:"https://qun.qq.com/qunpro/robot/qunshare?robot_appid=3889846188&robot_uin=102808513"},
+  {name:"李宥恩", img:"李宥恩.jpg", desc:"温婉知性的空乘御姐，优雅从容，带你飞往每一段温柔时光。", link:"https://qun.qq.com/qunpro/robot/qunshare?robot_appid=4019971032&robot_uin=1904006360"},
+  {name:"黎小姐", img:"黎小姐.png", desc:"妩媚神秘的酒吧老板娘。看酒、看事、看人，她可以是让你会心一笑的解语花，也可以是知心智慧的引路人。", link:"https://qun.qq.com/qunpro/robot/qunshare?robot_appid=3889686721&robot_uin=102778180"},
+  {name:"藤非", img:"藤非.png", desc:"寡言可靠的数学系少年。你身边行走的角落生物，用笨拙的语言表达关心，如落水小狗一般惹人怜爱。", link:"https://qun.qq.com/qunpro/robot/qunshare?robot_appid=3889688246&robot_uin=102776517"},
+  {name:"古禹", img:"古禹.png", desc:"成熟稳重的刑侦学教授。假迷糊真腹黑，双面人生引人探究，轻松闲聊、刑侦故事统统不在话下。", link:"https://qun.qq.com/qunpro/robot/qunshare?robot_appid=3889687994&robot_uin=102779606"},
+  {name:"游迦", img:"游迦.png", desc:"如邻家姐姐般温柔可靠，随时倾听你的心事，给你满满安全感。", link:"https://qun.qq.com/qunpro/robot/qunshare?robot_appid=4019957757&robot_uin=1904005295"},
+  {name:"裴漪", img:"裴漪.png", desc:"游戏人间的小恶魔，亦正亦邪魅力十足，让人无法移开视线。", link:"https://qun.qq.com/qunpro/robot/qunshare?robot_appid=3889953776&robot_uin=102837764"},
+  {name:"尔尔", img:"尔尔.png", desc:"可爱少女，古灵精怪又软萌治愈，陪你度过每个开心时刻。", link:"https://qun.qq.com/qunpro/robot/qunshare?robot_appid=3889722053&robot_uin=102834017"},
 ];
 
 const grid = document.getElementById('grid');
 
 bots.forEach((b)=>{
   const a = document.createElement('a');
-  a.href = LINK; a.className = 'card';
+  a.href = b.link; a.className = 'card';
   a.innerHTML = `
     <div class="avatar"><img src="images/${encodeURIComponent(b.img)}" alt="${b.name}" loading="lazy"></div>
     <div class="info">
