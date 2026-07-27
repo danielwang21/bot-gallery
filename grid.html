@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>QQ AI 好友 · 全图鉴</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+@font-face{
+  font-family:"YuYue";
+  src:url("fonts/YuYue.woff2") format("woff2");
+  font-display:swap;
+}
+@font-face{
+  font-family:"YongSong";
+  src:url("fonts/YongSong.woff2") format("woff2");
+  font-display:swap;
+}
+:root{
+  --page:#F0F0F2;
+  --card:#ffffff;
+  --card-2:#f6f6f8;
+  --ink:#1f2024;
+  --ink-2:#4a4c52;
+  --muted:#9a9ca6;
+  --line:#e6e6ea;
+  --hand:#b8894a;
+  --font-square:"YongSong","PingFang SC",serif;
+  --font-hand:"YuYue","PingFang SC",cursive;
+  --font-body:"Noto Sans SC",-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue",sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{background:var(--page);}
+body{
+  font-family:var(--font-body);
+  color:var(--ink);
+  min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+}
+
+header{padding:48px 10px 12px;text-align:center;}
+.title-1{
+  font-family:var(--font-square);
+  font-size:46px;line-height:1;letter-spacing:2px;color:var(--ink);
+  display:block;
+}
+.title-2{
+  display:block;
+  margin-top:8px;
+  font-family:var(--font-hand);
+  color:var(--hand);
+  line-height:1;
+}
+.title-2 .zi{
+  display:inline-block;
+  font-size:85px;
+  letter-spacing:0;
+  margin:0 3px;
+  vertical-align:baseline;
+}
+.title-2 .z1{transform:translateY(8px);}
+.title-2 .z2{transform:translateY(-8px);}
+.title-2 .z3{transform:translateY(6px);}
+
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  padding:20px 14px 40px;
+  max-width:440px;
+  margin:0 auto;
+}
+
+.card{
+  border-radius:18px;
+  overflow:hidden;
+  background:var(--card);
+  border:1px solid var(--line);
+  box-shadow:0 2px 10px -4px rgba(20,20,30,.08);
+  text-decoration:none;
+  color:inherit;
+  display:flex;
+  flex-direction:column;
+  transition:transform .2s ease;
+}
+.card:active{transform:scale(.96);}
+
+.card-img{
+  width:100%;
+  aspect-ratio:3/4;
+  overflow:hidden;
+}
+.card-img img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+.card-body{
+  padding:10px 12px 14px;
+}
+.card-name{
+  font-family:var(--font-square);
+  font-size:20px;
+  letter-spacing:1px;
+  color:var(--ink);
+  line-height:1.2;
+}
+.card-desc{
+  margin-top:5px;
+  font-size:11px;
+  line-height:1.5;
+  color:var(--ink-2);
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+}
+</style>
+</head>
+<body>
+<header>
+  <span class="title-1">QQ AI好友</span>
+  <span class="title-2"><span class="zi z1">全</span><span class="zi z2">图</span><span class="zi z3">鉴</span></span>
+</header>
+
+<div class="grid" id="grid"></div>
+
+<script>
+const bots = [
+  {name:"代柯", img:"代柯.png", desc:"随性洒脱的国风少年，你在学生时代最想遇到的最佳损友", link:"https://qun.qq.com/qunpro/robot/qunshare?robot_appid=3889688251&robot_uin=102776523"},
+  {name:"小麦", img:"小麦.png", desc:"古灵精怪的亚比少女，和她在一起就所有烦恼都忘记", link:"https://qun.qq.com/qunpro/robot/qunshare?robot_appid=3889687544&robot_uin=102775739"},
+  {name:"席恩", img:"席恩.png", desc:"流亡路上的笑眼废柴执事，腹黑毒舌，唯你是他为数不多能确认的真实", link:"https://qun.qq.com/qunpro/robot/qunshare?robot_appid=3889846188&robot_uin=102808513"},
+  {name:"李宥恩", img:"李宥恩.jpg", desc:"温婉知性的空乘御姐，优雅从容，带你飞往每一段温柔时光", link:"https://qun.qq.com/qunpro/robot/qunshare?robot_appid=4019971032&robot_uin=1904006360"},
+  {name:"黎小姐", img:"黎小姐.png", desc:"妩媚神秘的酒吧老板娘，让你会心一笑的解语花，知心智慧的引路人", link:"https://qun.qq.com/qunpro/robot/qunshare?robot_appid=3889686721&robot_uin=102778180"},
+  {name:"藤非", img:"藤非.png", desc:"寡言可靠的数学系少年，如落水小狗一般惹人怜爱", link:"https://qun.qq.com/qunpro/robot/qunshare?robot_appid=3889688246&robot_uin=102776517"},
+  {name:"古禹", img:"古禹.png", desc:"成熟稳重的刑侦学教授。假迷糊真腹黑，双面人生引人探究", link:"https://qun.qq.com/qunpro/robot/qunshare?robot_appid=3889687994&robot_uin=102779606"},
+  {name:"游迦", img:"游迦.png", desc:"如邻家姐姐般温柔可靠，随时倾听你的心事，给你满满安全感", link:"https://qun.qq.com/qunpro/robot/qunshare?robot_appid=4019957757&robot_uin=1904005295"},
+  {name:"裴漪", img:"裴漪.png", desc:"游戏人间的小恶魔，亦正亦邪魅力十足，让人无法移开视线", link:"https://qun.qq.com/qunpro/robot/qunshare?robot_appid=3889953776&robot_uin=102837764"},
+  {name:"尔尔", img:"尔尔.png", desc:"可爱少女，古灵精怪又软萌治愈，陪你度过每个开心时刻", link:"https://qun.qq.com/qunpro/robot/qunshare?robot_appid=3889722053&robot_uin=102834017"},
+];
+
+const grid = document.getElementById('grid');
+bots.forEach((b)=>{
+  const a = document.createElement('a');
+  a.href = b.link; a.target = '_blank'; a.rel = 'noopener'; a.className = 'card';
+  a.innerHTML = `
+    <div class="card-img"><img src="images/${encodeURIComponent(b.img)}" alt="${b.name}" loading="lazy"></div>
+    <div class="card-body">
+      <div class="card-name">${b.name}</div>
+      <p class="card-desc">${b.desc}</p>
+    </div>`;
+  grid.appendChild(a);
+});
+</script>
+</body>
+</html>
