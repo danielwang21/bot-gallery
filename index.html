@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>QQ AI 好友 · 全图鉴</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* 造字工房瑜悦体，用于「全图鉴」 */
+@font-face{
+  font-family:"YuYue";
+  src:url("fonts/YuYue.woff2") format("woff2");
+  font-display:swap;
+}
+/* 造字工房咏宋体，用于块状标题「QQ AI好友」与 bot 名字 */
+@font-face{
+  font-family:"YongSong";
+  src:url("fonts/YongSong.woff2") format("woff2");
+  font-display:swap;
+}
+:root{
+  --page:#F0F0F2;        /* 云母白 mica white */
+  --card:#ffffff;
+  --card-2:#f6f6f8;      /* subtle inner tint */
+  --ink:#1f2024;         /* near-black text */
+  --ink-2:#4a4c52;
+  --muted:#9a9ca6;
+  --line:#e6e6ea;
+  --line-2:#eeeef1;
+  --accent:#1f2024;      /* squarish title accent (deep ink) */
+  --hand:#b8894a;        /* handwriting warm accent */
+  --chip:#f2f2f5;
+  --font-square:"YongSong","PingFang SC",serif;
+  --font-hand:"YuYue","PingFang SC",cursive;
+  --font-body:"Noto Sans SC",-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue",sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{background:var(--page);}
+body{
+  font-family:var(--font-body);
+  color:var(--ink);
+  min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:440px;margin:0 auto;padding:0 16px 44px;}
+
+/* header — 居中：块状标题在上，行书「全图鉴」居中在下 */
+header{padding:52px 10px 16px;text-align:center;}
+.title-1{
+  font-family:var(--font-square);
+  font-size:46px;line-height:1;letter-spacing:2px;color:var(--ink);
+  display:block;
+}
+.title-2{
+  display:block;
+  margin-top:8px;
+  font-family:var(--font-hand);
+  color:var(--hand);
+  line-height:1;
+}
+/* 三个字高低错落：统一字号、不旋转，只做垂直位置错落；字间距缩小 */
+.title-2 .zi{
+  display:inline-block;
+  font-size:64px;
+  letter-spacing:0;
+  margin:0 3px;               /* 放宽字间距 */
+  vertical-align:baseline;
+}
+.title-2 .z1{transform:translateY(8px);}
+.title-2 .z2{transform:translateY(-8px);}
+.title-2 .z3{transform:translateY(6px);}
+
+/* section title */
+.sec-title{
+  display:flex;align-items:center;gap:10px;margin:30px 4px 16px;
+}
+.sec-title .bar{width:4px;height:18px;border-radius:2px;background:var(--ink);}
+.sec-title h2{font-family:var(--font-square);font-size:22px;letter-spacing:1px;color:var(--ink);}
+
+/* cards */
+.grid{display:flex;flex-direction:column;gap:12px;}
+.card{
+  position:relative;display:flex;gap:14px;align-items:center;
+  background:var(--card);border:1px solid var(--line);
+  border-radius:20px;padding:13px 14px;
+  text-decoration:none;color:inherit;
+  box-shadow:0 1px 2px rgba(20,20,30,.03);
+  transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;
+}
+.card:active{transform:scale(.985);}
+@media(hover:hover){
+  .card:hover{box-shadow:0 12px 28px -14px rgba(30,30,40,.28);border-color:#dcdce2;transform:translateY(-2px);}
+}
+.avatar{
+  position:relative;flex:0 0 78px;width:78px;height:78px;border-radius:16px;overflow:hidden;
+  background:var(--card-2);border:1px solid var(--line);
+}
+.avatar img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .45s ease;}
+.card:hover .avatar img{transform:scale(1.06);}
+.info{flex:1;min-width:0;}
+.name-row{display:flex;align-items:baseline;gap:9px;}
+.name{font-family:var(--font-square);font-size:24px;letter-spacing:1px;color:var(--ink);line-height:1.1;}
+.desc{margin-top:7px;font-size:12.5px;line-height:1.55;color:var(--ink-2);opacity:.85;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.go{
+  flex:0 0 auto;width:34px;height:34px;border-radius:50%;
+  display:grid;place-items:center;background:var(--chip);border:1px solid var(--line);
+  transition:background .2s,border-color .2s;
+}
+.card:hover .go{background:var(--ink);border-color:var(--ink);}
+.go svg{width:15px;height:15px;fill:none;stroke:var(--ink-2);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;transition:stroke .2s;}
+.card:hover .go svg{stroke:#fff;}
+
+/* CTA */
+.cta{
+  display:block;text-align:center;margin-top:30px;
+  background:var(--ink);color:#f5f5f7;
+  font-family:var(--font-square);font-size:20px;letter-spacing:2px;
+  padding:16px;border-radius:16px;text-decoration:none;
+  box-shadow:0 8px 20px -10px rgba(20,20,30,.5);
+}
+.cta:active{opacity:.92;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="title-1">QQ AI好友</span>
+    <span class="title-2"><span class="zi z1">全</span><span class="zi z2">图</span><span class="zi z3">鉴</span></span>
+  </header>
+
+  <div class="sec-title">
+    <span class="bar"></span>
+    <h2>选择你的 AI 好友</h2>
+  </div>
+
+  <main class="grid" id="grid"></main>
+
+  <a class="cta" href="https://qun.qq.com/qunpro/robot/qunshare?robot_appid=3889688251&robot_uin=102776523">立即添加 · 开启对话</a>
+</div>
+
+<script>
+const LINK = "https://qun.qq.com/qunpro/robot/qunshare?robot_appid=3889688251&robot_uin=102776523";
+const bots = [
+  {name:"席恩", img:"席恩.png", desc:"QC 生命体四号，遇事沉着，不含糊。\u201c大小姐，性格酷炫的人，说的不是我吧？\u201d"},
+  {name:"代柯", img:"代柯.png", desc:"酷爱不羁的隐士，游走人间，热衷有趣事，为人淡然自若。"},
+  {name:"小麦", img:"小麦.png", desc:"资深御宅族，乐队鬼马少女，人形守护甜心，元气满满。"},
+  {name:"藤非", img:"藤非.png", desc:"寡言而可靠的数学天才，典型 INTP，不苟言笑却自有天真烂漫。"},
+  {name:"黎小姐", img:"黎小姐.png", desc:"风情万种又神秘莫测的酒吧老板娘，眼神里藏着故事。"},
+  {name:"游迦", img:"游迦.png", desc:"如邻家姐姐般温柔可靠，随时倾听你的心事，给你满满安全感。"},
+  {name:"尔尔", img:"尔尔.png", desc:"可爱少女，古灵精怪又软萌治愈，陪你度过每个开心时刻。"},
+  {name:"裴漪", img:"裴漪.png", desc:"游戏人间的小恶魔，亦正亦邪魅力十足，让人无法移开视线。"},
+  {name:"古禹", img:"古禹.png", desc:"沉稳内敛的思想者，逻辑清晰，言辞恳切，值得依赖的挚友。"},
+  {name:"李宥恩", img:"李宥恩.jpg", desc:"温婉知性的空乘御姐，优雅从容，带你飞往每一段温柔时光。"},
+];
+
+const grid = document.getElementById('grid');
+
+bots.forEach((b)=>{
+  const a = document.createElement('a');
+  a.href = LINK; a.className = 'card';
+  a.innerHTML = `
+    <div class="avatar"><img src="images/${encodeURIComponent(b.img)}" alt="${b.name}" loading="lazy"></div>
+    <div class="info">
+      <div class="name-row"><span class="name">${b.name}</span></div>
+      <p class="desc">${b.desc}</p>
+    </div>
+    <div class="go"><svg viewBox="0 0 24 24"><path d="M8 5l7 7-7 7"/></svg></div>`;
+  grid.appendChild(a);
+});
+</script>
+</body>
+</html>
